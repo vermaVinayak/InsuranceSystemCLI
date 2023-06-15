@@ -1,0 +1,81 @@
+@Test
+    public void TY_01_existing_name() throws Exception {
+      // Write your own test here, in the same format as the other tests.
+      runCommands(CREATE_PROFILE, "Jordan", "21", CREATE_PROFILE, "Jordan", "25", CREATE_PROFILE, "Jordan", "89", PRINT_DB);
+      assertContains("Usernames must be unique. No profile was created for 'Jordan'.");
+    }
+
+    @Test
+    public void TY_02_age_value() throws Exception {
+      // Write your own test here, in the same format as the other tests.
+      runCommands(CREATE_PROFILE, "Jordan", "hello");
+      assertContains("'hello' is an invalid age, please provide a positive whole number only. No profile was created"
+      + " for Jordan.");
+    }
+  
+    @Test
+    public void TY_03_valid_age_rating() throws Exception {
+      // Write your own test here, in the same format as the other tests.
+      runCommands(CREATE_PROFILE, "Shaun", "-3");
+      assertContains("'-3' is an invalid age, please provide a positive whole number only. No profile was created"
+      + " for Shaun.");
+    }
+
+    @Test
+    public void TY_04_single_client_load_profile() throws Exception {
+      // Write your own test here, in the same format as the other tests.
+      runCommands(CREATE_PROFILE, "Shaun", "26", LOAD_PROFILE, "Shaun", PRINT_DB);
+      assertContains("*** 1: Shaun, 26");
+    }
+
+    @Test
+    public void TY_05_one_life_policy() throws Exception {
+      // Write your own test here, in the same format as the other tests.
+      runCommands(CREATE_PROFILE, "Shaun", "26",
+      LOAD_PROFILE, "Shaun",
+      POLICY_LIFE, options("10000"),
+      POLICY_LIFE, options("20000"));
+      assertContains("Shaun already has a life policy. No new policy was created.");
+    }
+
+    @Test
+    public void TY_06_print_db_singular_plural_profile() throws Exception {
+      // Write your own test here, in the same format as the other tests.
+      runCommands(CREATE_PROFILE, "Shaun", "26",
+      LOAD_PROFILE, "Shaun",
+      POLICY_LIFE, options("10000"),
+      PRINT_DB, UNLOAD_PROFILE);
+      assertContains("1: Shaun, 26, 1 policy");
+    }
+
+    @Test
+    public void TY_07_three_policies_one_profile() throws Exception {
+      runCommands(
+          unpack(
+              CREATE_SOME_CLIENTS,
+              LOAD_PROFILE,
+              "Jenny",
+              POLICY_HOME,
+              options("1000000", "15 ambler ave", "no"),
+              POLICY_CAR,
+              options("10000", "Audi E-tron 2023", "KWB847", "yes"),
+              POLICY_LIFE,
+              options("1"),
+              PRINT_DB));
+
+      assertContains("Profile loaded for Jenny.");
+      assertContains("New home policy created for Jenny.");
+      assertContains("New car policy created for Jenny.");
+      assertContains("New life policy created for Jenny.");
+
+      assertContains("Database has 3 profiles:");
+      assertContains("1: Jordan, 21, 0 policies");
+      assertContains("2: Tom, 25, 0 policies");
+      assertContains("*** 3: Jenny, 23, 3 policies");
+
+      assertContains(
+          "Home Policy (15 ambler ave, Sum Insured: $1000000, Premium: $10000 -> $8000)");
+      assertContains(
+          "Car Policy (Audi E-tron 2023, Sum Insured: $10000, Premium: $1580 -> $1264)");
+      assertContains("Life Policy (Sum Insured: $1, Premium: $0 -> $0)");
+    }

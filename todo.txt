@@ -1,0 +1,8 @@
+Final Checks
+- Check against peer tests on Ed. ✔
+    - joshua ✔
+    - Betty ✔
+        - previously loaded profile does not load after issuing load profile to non existent profile.
+    - Josiah Sterling ✔
+    - Cameron Dean ✔
+- run code style again after rectifying the found format issues.
