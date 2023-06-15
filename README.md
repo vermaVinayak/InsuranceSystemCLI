@@ -1,5 +1,12 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/miIEXoNC)
-# Assignment 1
+# Insurance System CLI
+## SOFTENG 281 assignment 1 implemented using Java
+### Get Started
+Making use of Maven framework for ease of development 😊.
+1. To start using the system navigate to the directory run the following command in CLI.
+```html
+.\mvnw.cmd clean compile exec:java@run
+```
+### Features
+![Features](readme_content\features2.jpg)
 
-You will find instructions for this assignment on the course website.
 
