@@ -7,6 +7,6 @@ Making use of Maven framework for ease of development 😊.
 .\mvnw.cmd clean compile exec:java@run
 ```
 ### Features
-![Features](readme_content\features2.jpg)
+![Features](readme_content/features2.jpg)
 
 
